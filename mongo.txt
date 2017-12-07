@@ -1,0 +1,91 @@
+1
+> use iota
+> db.createCollection('orders')
+> var orders = db.orders
+
+2
+orders.insert({
+    orderDate: new ISODate('2010-05-20'),
+    orderTotal: 60,
+    lineItems: [
+      {productName: "penguins",
+      unitPrice: 5,
+      quantity: 4
+      },
+      {productName: "cheetahs",
+      unitPrice: 4,
+      quantity: 5
+      },
+      {productName: "ducks",
+      unitPrice: 2,
+      quantity: 10
+      },
+    ]
+})
+
+orders.insert({
+    orderDate: new ISODate('2012-05-20'),
+    orderTotal: 10,
+    lineItems: [
+      {productName: "monkeys",
+      unitPrice: 1,
+      quantity: 5
+      },
+      {productName: "zebras",
+      unitPrice: 5,
+      quantity: 1
+      }
+    ]
+})
+
+orders.insert({
+    orderDate: new ISODate('2014-05-20'),
+    orderTotal: 100,
+    lineItems: [
+      {productName: "lions",
+      unitPrice: 10,
+      quantity: 10
+      }
+    ]
+})
+
+orders.insert([{
+    orderDate: new ISODate('2016-05-20'),
+    orderTotal: 1,
+    lineItems: [
+      {productName: "zebras",
+      unitPrice: 1,
+      quantity: 1
+      }
+    ]
+},
+{
+    orderDate: new ISODate('2013-05-20'),
+    orderTotal: 2,
+    lineItems: [
+      {productName: "zebras",
+      unitPrice: 1,
+      quantity: 2
+      }
+    ]
+}])
+
+3
+
+orders.find({_id: ObjectId("5a296d0cf93d7b264c42ffff")})
+
+4
+
+orders.find().pretty()
+
+5
+
+orders.find({orderDate: {$lt: new Date('2016-01-01')}})
+
+6
+
+orders.find({orderDate: {$gt: new Date('2016-01-01')}})
+
+7
+
+orders.find({'lineItems.quantity':{$lt: 50}, 'lineItems.quantity':{$gt: 5}})
